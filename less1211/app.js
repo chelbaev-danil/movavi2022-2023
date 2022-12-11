@@ -30,7 +30,7 @@ app.get('/test/:id', (req, res) =>{
 })
 app.get('/square/:id', (req, res) =>{
     var id = req.params.id;
-    if (typeof(Number(id))!=NaN && typeof(Number(id)) == 'Number'){
+    if (Number(id)){
         res.send(`Result ${id**2}`)
     }else{
         res.send(`Result ${id.repeat(2)}`)

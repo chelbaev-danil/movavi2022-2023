@@ -38,8 +38,23 @@
 
 // console.log(fizzBuzz(15));
 
-var middleNode = function(head) {
-    return head.length%2==0? head.slice(head.length/2):head.slice((head.length-1)/2 )
-};
+// var middleNode = function(head) {
+//     return head.length%2==0? head.slice(head.length/2):head.slice((head.length-1)/2 )
+// };
 
-console.log(middleNode([1,2,3]));
+// console.log(middleNode([1,2,3]));
+
+var kWeakestRows = function(mat) {
+    let s = 0
+    let arr = []
+    for (i in mat){
+        for (y in mat[i]){
+            s+=mat[i][y]
+        }
+        arr.push(s)
+        s=0
+        arr.sort()
+    }
+    return arr
+};
+console.log(kWeakestRows([[1,1,0,0,0],[1,1,1,1,0],[1,0,0,0,0],[1,1,0,0,0],[1,1,1,1,1]]));
