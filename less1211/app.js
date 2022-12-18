@@ -1,11 +1,17 @@
 const express = require("express")
+const BlogRouter = require("./routes/blog-router")
+const AboutRouter = require("./routes/about-route")
+const TestRouter = require("./routes/test-router")
 
 const HOST = "localhost"
 const PORT = 3000
 
 const app = express()
 
+app.set("view engine", "hbs");
+app.set('views', __dirname + '/view');
 
+app.use(express.static(__dirname + "/static")) // use styles to index.html and another ones
 
 // app.get('/', (req, res) => {
 //     res.send("hellooo menchik")
@@ -19,15 +25,20 @@ const app = express()
 // app.get('/gallery', (req, res) => {
 //     res.send("there will be a photo")
 // })
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/index.html")
 })
-app.use(express.static(__dirname + "/static")) // use styles to index.html and another ones
 
-app.get('/test/:id', (req, res) =>{
-    var id = req.params.id;
-    res.send(`Вы перешли на подстраницу ${id}`)
-})
+app.use('/blog', BlogRouter)
+app.use('/about', AboutRouter)
+app.use('/test', TestRouter)
+
+// app.get('/test/:id', (req, res) =>{
+//     var id = req.params.id;
+//     res.send(`Вы перешли на подстраницу ${id}`)
+// })
+
 app.get('/square/:id', (req, res) =>{
     var id = req.params.id;
     if (Number(id)){
@@ -38,15 +49,15 @@ app.get('/square/:id', (req, res) =>{
     
 })
 
-app.use((req, res, next) => {
-    var pages = ['/about'];
-    var link = req.path;
-    if(pages.includes(link)){
-        res.sendFile(__dirname + `/public${link}.html`)
-    }else{
-        next()
-    }
-})
+// app.use((req, res, next) => {
+//     var pages = ['/about'];
+//     var link = req.path;
+//     if(pages.includes(link)){
+//         res.sendFile(__dirname + `/public${link}.html`)
+//     }else{
+//         next()
+//     }
+// })
 
 app.use((req, res, next) => {
     res.status(404).send("the page doesn't exist")
