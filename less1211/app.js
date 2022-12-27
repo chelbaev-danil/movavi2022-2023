@@ -1,7 +1,11 @@
 const express = require("express")
+const cors = require("cors")
+
 const BlogRouter = require("./routes/blog-router")
 const AboutRouter = require("./routes/about-route")
 const TestRouter = require("./routes/test-router")
+const ApiRouter = require("./routes/api")
+
 
 const HOST = "localhost"
 const PORT = 3000
@@ -11,6 +15,11 @@ const app = express()
 app.set("view engine", "hbs");
 app.set('views', __dirname + '/view');
 
+app.use(cors(
+    {
+        origin: "*"
+    }
+))
 app.use(express.static(__dirname + "/static")) // use styles to index.html and another ones
 
 // app.get('/', (req, res) => {
@@ -33,6 +42,8 @@ app.get('/', (req, res) => {
 app.use('/blog', BlogRouter)
 app.use('/about', AboutRouter)
 app.use('/test', TestRouter)
+app.use('/api', ApiRouter)
+
 
 // app.get('/test/:id', (req, res) =>{
 //     var id = req.params.id;
