@@ -1,0 +1,50 @@
+{{!-- <div>
+    <form action="">
+        <p>What color is banana?</p>
+        <input type="radio"  name="b-c">
+        <label for="red">Red</label><br>
+
+        <input type="radio"  name="b-c" >
+        <label for="blue">Blue</label><br>
+
+        <input type="radio"  name="b-c">
+        <label for="yellow">Yellow</label>
+
+        <br>  
+
+        <p>What is Sonya's surname?</p>
+
+        <input type="radio"  name="age">
+        <label for="na1">Litvina</label><br>
+
+        <input type="radio"  name="age">
+        <label for="na2">Abramova</label><br>  
+
+        <input type="radio"  name="age">
+        <label for="na3">Suvorova</label><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div> --}}
+
+
+<h1>{{title}}</h1>
+<p>{{description}}</p>
+<p>{{test}}</p>
+<form action="/sendtest" method="post">
+    {{#each q_test as |value key|}}
+        <p>{{this.desc}}</p>
+        {{#if this.radio }}
+            {{#each this.variants }}
+                <input type="radio" name="rad_{{key}}" id=""> {{this}} <br>
+            {{/each}}
+        {{/if}}
+        {{#if this.input }}
+            <input type="text" name="" id=""> <br>
+        {{/if}}
+        {{#if this.check }}
+            <input type="checkbox" name="" id=""> desc <br>
+        {{/if}}
+    {{/each}}
+    <button>Send</button>
+</form>
