@@ -1,50 +1,24 @@
-{{!-- <div>
-    <form action="">
-        <p>What color is banana?</p>
-        <input type="radio"  name="b-c">
-        <label for="red">Red</label><br>
-
-        <input type="radio"  name="b-c" >
-        <label for="blue">Blue</label><br>
-
-        <input type="radio"  name="b-c">
-        <label for="yellow">Yellow</label>
-
-        <br>  
-
-        <p>What is Sonya's surname?</p>
-
-        <input type="radio"  name="age">
-        <label for="na1">Litvina</label><br>
-
-        <input type="radio"  name="age">
-        <label for="na2">Abramova</label><br>  
-
-        <input type="radio"  name="age">
-        <label for="na3">Suvorova</label><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
-</div> --}}
-
-
 <h1>{{title}}</h1>
 <p>{{description}}</p>
 <p>{{test}}</p>
-<form action="/sendtest" method="post">
+<form action="/test/send" method="post">
     {{#each q_test as |value key|}}
         <p>{{this.desc}}</p>
         {{#if this.radio }}
-            {{#each this.variants }}
-                <input type="radio" name="rad_{{key}}" id=""> {{this}} <br>
+            {{#each this.variants as |val1 k1| }}
+                <input type="radio" name="rad_{{key}}" value="{{k1}}"> {{this}} <br>
             {{/each}}
         {{/if}}
         {{#if this.input }}
-            <input type="text" name="" id=""> <br>
+            <input type="text" name="inp_{{key}}"> <br>
         {{/if}}
         {{#if this.check }}
-            <input type="checkbox" name="" id=""> desc <br>
+            {{#each this.variants as |check_value check_key|}}
+                <input type="checkbox" name="che_{{key}}" value="{{check_key}}"> {{this}} <br>
+            {{/each}}
         {{/if}}
     {{/each}}
-    <button>Send</button>
+    <input type="radio" checked name="p_{{s_id}}" value="{{s_id}}" style="display: none;">
+    <input type="submit" value="send">
+    
 </form>
